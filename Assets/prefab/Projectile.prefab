@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3388377284085570357}
   - component: {fileID: 4454775258670920187}
   - component: {fileID: 5709301724486982794}
+  - component: {fileID: -8390179008682309522}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -119,3 +120,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-8390179008682309522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836896395946015652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3156d8801c03daf46aef3fac8c507790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileImpact
+  explosionRadius: 0.8

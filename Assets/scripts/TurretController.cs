@@ -59,6 +59,6 @@ public class TurretController : MonoBehaviour
         {
             rb.AddForce(firePoint.right * launchForce, ForceMode2D.Impulse);
         }
-        Destroy(spawnedProjectile, 3f); // Destroy the projectile after 5 seconds to prevent clutter
+        Destroy(spawnedProjectile, 10f);
     }
 }
