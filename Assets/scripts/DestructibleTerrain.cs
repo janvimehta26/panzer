@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.U2D; // Required for SpriteShapeController and Spline
+using UnityEngine.U2D;
 
 public class DestructibleTerrain : MonoBehaviour
 {
@@ -9,14 +9,9 @@ public class DestructibleTerrain : MonoBehaviour
     private void Start()
     {
         shapeController = GetComponent<SpriteShapeController>();
-        
         if (shapeController != null)
         {
             spline = shapeController.spline;
-        }
-        else
-        {
-            Debug.LogError("[DestructibleTerrain] Missing SpriteShapeController on terrain!");
         }
     }
 
@@ -24,41 +19,31 @@ public class DestructibleTerrain : MonoBehaviour
     {
         if (shapeController == null || spline == null) return;
 
-        // 1. Convert world impact point to local terrain space
         Vector3 localImpact = transform.InverseTransformPoint(worldHitPoint);
 
-        // 2. Remove existing spline points that fall inside the explosion circle
-        for (int i = spline.GetPointCount() - 1; i >= 0; i--)
+        // 1. Find the single closest point on the spline near the impact
+        int closestIndex = GetClosestSplineIndex(localImpact);
+
+        // 2. Instead of removing points and breaking the spline order,
+        // offset nearby points downward to form a crater curve
+        for (int i = 0; i < spline.GetPointCount(); i++)
         {
             Vector3 pointPos = spline.GetPosition(i);
-            if (Vector3.Distance(localImpact, pointPos) < explosionRadius)
+            float dist = Vector3.Distance(localImpact, pointPos);
+
+            if (dist < explosionRadius)
             {
-                spline.RemovePointAt(i);
+                // Push existing points downward inside the blast radius
+                float depth = (explosionRadius - dist);
+                spline.SetPosition(i, new Vector3(pointPos.x, pointPos.y - depth, pointPos.z));
             }
         }
 
-        // 3. Find closest point index to insert crater vertices
-        int insertIndex = GetClosestSplineIndex(localImpact);
+        // 3. Force Unity to rebuild the visual mesh and physics collider
+        shapeController.BakeMesh();
+        shapeController.BakeCollider();
 
-        // 4. Insert new points forming a downward crater arc
-        for (int i = 0; i <= craterSegments; i++)
-        {
-            float angle = Mathf.PI * (i / (float)craterSegments);
-            
-            Vector3 craterPoint = new Vector3(
-                localImpact.x + Mathf.Cos(angle) * explosionRadius,
-                localImpact.y - Mathf.Sin(angle) * explosionRadius,
-                0f
-            );
-
-            spline.InsertPointAt(insertIndex + i, craterPoint);
-            spline.SetTangentMode(insertIndex + i, ShapeTangentMode.Linear);
-        }
-
-        // 5. Rebuild visual shape and update PolygonCollider2D physics
-        shapeController.RefreshShapePositions();
-        
-        Debug.Log($"[Terrain] Sprite Shape crater carved at local coordinates: {localImpact}");
+        Debug.Log($"[Terrain System] Depressed spline near index {closestIndex} at local position: {localImpact}");
     }
 
     private int GetClosestSplineIndex(Vector3 targetPos)
