@@ -144,11 +144,57 @@ Transform:
   m_GameObject: {fileID: 49031981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.39, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 634983407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &116240857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 116240859}
+  - component: {fileID: 116240858}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &116240858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116240857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789487f44e108d240975d7e0b0c0f138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnManager
+  player1Turret: {fileID: 243056041}
+  player2Turret: {fileID: 2021686367}
+--- !u!4 &116240859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116240857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.97917, y: 12.32696, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195448496
 GameObject:
@@ -241,6 +287,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &243056038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6395007953734727287, guid: e821f2e8487ac684cb073b59479e87ee, type: 3}
+  m_PrefabInstance: {fileID: 1804529380745431167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &243056041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243056038}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa0fdba6d169fe4eb0be093380c6c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurretController
+  facingDirection: 1
+  currentAngle: 0
+  minAngle: -80
+  maxAngle: 80
+  angleStep: 10
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  launchForce: 20
 --- !u!1 &312766506
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +858,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634983406}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.8, y: 1.4, z: 0}
   m_LocalScale: {x: 0.6993007, y: 0.6993007, z: 0.6993007}
   m_ConstrainProportionsScale: 0
@@ -807,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa0fdba6d169fe4eb0be093380c6c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretController
+  facingDirection: 1
   currentAngle: 0
   minAngle: 0
   maxAngle: 90
@@ -861,7 +933,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3104301513268402212, guid: c4b021b092b6726479db02cb8864ef20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3277,6 +3349,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6402094672702974570, guid: 3d46cfbf064938a4ba993bbe43f40027, type: 3}
   m_PrefabInstance: {fileID: 7615890501115115425}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021686365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3990529561068090729, guid: 3d46cfbf064938a4ba993bbe43f40027, type: 3}
+  m_PrefabInstance: {fileID: 7615890501115115425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2021686367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021686365}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa0fdba6d169fe4eb0be093380c6c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurretController
+  facingDirection: -1
+  currentAngle: 0
+  minAngle: -80
+  maxAngle: 80
+  angleStep: 10
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  launchForce: 20
 --- !u!1001 &1625632437889650388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3401,7 +3498,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6395007953734727287, guid: e821f2e8487ac684cb073b59479e87ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 243056041}
   m_SourcePrefab: {fileID: 100100000, guid: e821f2e8487ac684cb073b59479e87ee, type: 3}
 --- !u!1001 &7615890501115115425
 PrefabInstance:
@@ -3461,7 +3561,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6402094672702974570, guid: 3d46cfbf064938a4ba993bbe43f40027, type: 3}
       insertIndex: -1
       addedObject: {fileID: 634983407}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3990529561068090729, guid: 3d46cfbf064938a4ba993bbe43f40027, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2021686367}
   m_SourcePrefab: {fileID: 100100000, guid: 3d46cfbf064938a4ba993bbe43f40027, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -3478,3 +3581,4 @@ SceneRoots:
   - {fileID: 1644335582}
   - {fileID: 1804529380745431167}
   - {fileID: 7615890501115115425}
+  - {fileID: 116240859}
