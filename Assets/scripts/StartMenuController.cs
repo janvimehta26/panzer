@@ -1,20 +1,30 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required to use SceneManager
+using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
 {
-    // Match this exact string to your actual game scene name in Assets/Scenes
+    [Header("Scene Names")]
     [SerializeField] private string mainGameSceneName = "GameView";
+    [SerializeField] private string mainMenuSceneName = "StartMenu"; // Replace with your exact start scene name
 
+    // Called by Start Button in Main Menu
     public void OnStartClick()
     {
-        Debug.Log("[StartMenu] Loading main game scene...");
+        Debug.Log("[Menu] Loading main game scene...");
         SceneManager.LoadScene(mainGameSceneName);
     }
 
+    // Called by Back Button in Game View
+    public void OnBackClick()
+    {
+        Debug.Log("[Menu] Returning to main menu...");
+        SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    // Called by Exit Button
     public void OnExitClick()
     {
-        Debug.Log("[StartMenu] Exiting application...");
+        Debug.Log("[Menu] Exiting application...");
 
         Application.Quit();
 
